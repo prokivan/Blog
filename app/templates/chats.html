@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Your Chats</h2>
+
+    <form action="{{ url_for('chats') }}" method="get">
+        <input type="text" name="search_query" placeholder="Search by username" value="{{ request.args.get('search_query', '') }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <ul>
+        {% for chat_info in chats %}
+            <li>
+                Chat with:
+                <a href="{{ url_for('chat', chat_id=chat_info.chat.id) }}">
+                    {{ chat_info.other_user.username }}
+                </a>
+                {% if chat_info.unread_count > 0 %}
+                    <span class="unread-notification">{{ chat_info.unread_count }}</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

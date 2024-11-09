@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h2>Chat with <a href="{{ url_for('user', username=other_user.username) }}">{{ other_user.username }}</a></h2>
+    <h4>Back <a href="{{ url_for('chats') }}">My Chats</a></h4>
+
+    <form method="POST">
+        <input type="text" name="message" placeholder="Type a message..." required>
+        <button type="submit">Send</button>
+    </form>
+
+    <div class="messages">
+        <table>
+            {% for message in messages %}
+                <tr valign="top">
+                    <td><img src="{{ message.sender.avatar(36) }}" class="avatar-small"></td>
+                    <td>
+                        <a href="{{ url_for('user', username=message.sender.username) }}">
+                            {{ message.sender.username }}
+                        </a>
+                        said {{ moment(message.timestamp).fromNow() }}:
+                        <br>
+                        {{ message.content }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+
+        {% if prev_url %}
+            <a href="{{ prev_url }}">Newer messages</a>
+        {% endif %}
+
+        {% if next_url %}
+            <a href="{{ next_url }}">Older messages</a>
+        {% endif %}
+    </div>
+
+
+{% endblock %}

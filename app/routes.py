@@ -1,11 +1,14 @@
 from urllib.parse import urlsplit
-from flask import render_template, flash, redirect, url_for, request
+from flask import render_template, flash, redirect, url_for, request, current_app, send_from_directory
 from flask_login import login_user, logout_user, current_user, login_required
 import sqlalchemy as sa
 from app import app, db
 from app.forms import LoginForm, RegistrationForm, EditProfileForm, EmptyForm, PostForm
-from app.models import User, Post
+from app.models import User, Post, Chat, Message
 from datetime import datetime, timezone
+from sqlalchemy import desc, func, or_
+import os
+from werkzeug.utils import secure_filename
 
 
 @app.route('/', methods=['GET', 'POST'])
@@ -118,14 +121,25 @@ def edit_profile():
     if form.validate_on_submit():
         current_user.username = form.username.data
         current_user.about_me = form.about_me.data
+
+        if form.avatar.data:
+            filename = secure_filename(form.avatar.data.filename)
+            file_path = os.path.join(current_app.config['UPLOAD_FOLDER'], filename)
+            form.avatar.data.save(file_path)
+            current_user.avatar_filename = filename
+
         db.session.commit()
         flash('Your changes have been saved.')
         return redirect(url_for('edit_profile'))
     elif request.method == 'GET':
         form.username.data = current_user.username
         form.about_me.data = current_user.about_me
-    return render_template('edit_profile.html', title='Edit Profile',
-                           form=form)
+    return render_template('edit_profile.html', title='Edit Profile', form=form)
+
+
+@app.route('/uploads/<filename>')
+def uploads(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 @app.route('/follow/<username>', methods=['POST'])
@@ -168,3 +182,80 @@ def unfollow(username):
         return redirect(url_for('user', username=username))
     else:
         return redirect(url_for('index'))
+
+
+@app.route('/start_chat/<int:user_id>', methods=['GET', 'POST'])
+@login_required
+def start_chat(user_id):
+    chat = Chat.query.filter_by(user1_id=current_user.id, user2_id=user_id).first() or \
+           Chat.query.filter_by(user1_id=user_id, user2_id=current_user.id).first()
+    if not chat:
+        chat = Chat(user1_id=current_user.id, user2_id=user_id)
+        db.session.add(chat)
+        db.session.commit()
+    return redirect(url_for('chat', chat_id=chat.id))
+
+
+@app.route('/chat/<int:chat_id>', methods=['GET', 'POST'])
+@login_required
+def chat(chat_id):
+    chat = Chat.query.get_or_404(chat_id)
+    if current_user.id in [chat.user1_id, chat.user2_id]:
+        if chat.user1_id == current_user.id:
+            other_user = User.query.get(chat.user2_id)
+        else:
+            other_user = User.query.get(chat.user1_id)
+
+        Message.query.filter_by(chat_id=chat.id, read=False).filter(Message.sender_id != current_user.id).update(
+            {"read": True})
+        db.session.commit()
+
+        if request.method == 'POST':
+            message = Message(chat_id=chat.id, sender_id=current_user.id, content=request.form['message'])
+            message.read = False
+            db.session.add(message)
+            db.session.commit()
+
+        page = request.args.get('page', 1, type=int)
+        messages = Message.query.filter_by(chat_id=chat.id).order_by(Message.timestamp.desc()).paginate \
+            (page=page, per_page=app.config['POSTS_PER_PAGE'], error_out=False)
+
+        next_url = url_for('chat', chat_id=chat.id, page=messages.next_num) if messages.has_next else None
+        prev_url = url_for('chat', chat_id=chat.id, page=messages.prev_num) if messages.has_prev else None
+
+        return render_template('chat.html', chat=chat, messages=messages.items, \
+                               other_user=other_user, next_url=next_url, prev_url=prev_url)
+
+
+@app.route('/chats')
+@login_required
+def chats():
+    search_query = request.args.get('search_query', '').strip()
+
+    latest_messages = db.session.query(
+        Message.chat_id, func.max(Message.timestamp).label('last_msg_time')
+    ).group_by(Message.chat_id).subquery()
+
+    user_chats = db.session.query(Chat).join(
+        latest_messages, Chat.id == latest_messages.c.chat_id
+    ).filter(
+        (Chat.user1_id == current_user.id) | (Chat.user2_id == current_user.id)
+    ).order_by(desc(latest_messages.c.last_msg_time))
+
+    if search_query:
+        user_chats = user_chats.join(User, or_(
+            Chat.user1_id == User.id, Chat.user2_id == User.id
+        )).filter(User.username.ilike(f"%{search_query}%"))
+
+    chat_data = [
+        {
+            "chat": chat,
+            "other_user": User.query.get(chat.user1_id) if chat.user2_id == current_user.id else \
+                User.query.get(chat.user2_id),
+            "unread_count": Message.query.filter_by(chat_id=chat.id, read=False).filter(
+                Message.sender_id != current_user.id).count()
+        }
+        for chat in user_chats.all()
+    ]
+
+    return render_template('chats.html', chats=chat_data)

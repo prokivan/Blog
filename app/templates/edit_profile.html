@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1>Edit Profile</h1>
-    <form action="" method="post">
+    <form action="" method="post" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <p>
             {{ form.username.label }}<br>
@@ -15,6 +15,13 @@
             {{ form.about_me.label }}<br>
             {{ form.about_me(cols=50, rows=4) }}<br>
             {% for error in form.about_me.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+        <p>
+            {{ form.avatar.label }}<br>
+            {{ form.avatar() }}<br>
+            {% for error in form.avatar.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>

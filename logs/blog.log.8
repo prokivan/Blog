@@ -1,4 +1,4 @@
-2024-11-08 12:24:06,002 ERROR: Exception on /index [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+2024-11-06 15:16:55,211 ERROR: Exception on /chats [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
 Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -10,8 +10,8 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "C:\pycharm\Finall_Project\app\routes.py", line 32, in index
-    return render_template('index.html', title='Home', form=form,
+  File "C:\pycharm\Finall_Project\app\routes.py", line 276, in chats
+    return render_template('chats.html', chats=chat_data)
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 150, in render_template
     return _render(app, template, context)
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 131, in _render
@@ -20,42 +20,21 @@ Traceback (most recent call last):
     self.environment.handle_exception()
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 939, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "C:\pycharm\Finall_Project\app\templates\index.html", line 1, in top-level template code
+  File "C:\pycharm\Finall_Project\app\templates\chats.html", line 1, in top-level template code
     {% extends "base.html" %}
-  File "C:\pycharm\Finall_Project\app\templates\base.html", line 33, in top-level template code
+  File "C:\pycharm\Finall_Project\app\templates\base.html", line 34, in top-level template code
     {% block content %}{% endblock %}
-  File "C:\pycharm\Finall_Project\app\templates\index.html", line 19, in block 'content'
-    {% include '_post.html' %}
-  File "C:\pycharm\Finall_Project\app\templates\_post.html", line 3, in top-level template code
-    <td><img src="{{ post.author.avatar(36) }}" class="avatar-small"></td>
-  File "C:\pycharm\Finall_Project\app\models.py", line 59, in avatar
-    return url_for('uploads', filename=self.avatar_filename)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
-    return current_app.url_for(
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1084, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1073, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'uploads' with values ['filename']. Did you mean 'explore' instead?
-2024-11-08 12:30:16,325 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:30:20,019 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:34:53,005 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:36:23,296 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:36:54,156 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:37:08,510 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:37:13,836 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:37:17,142 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:38:03,996 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:38:14,904 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:38:20,830 ERROR: Exception on /login [POST] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+  File "C:\pycharm\Finall_Project\app\templates\chats.html", line 12, in block 'content'
+    {% if chat_info.unread_count_user1 > 0 %}
+jinja2.exceptions.UndefinedError: 'dict object' has no attribute 'unread_count_user1'
+2024-11-06 15:17:25,856 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-06 15:17:28,692 ERROR: Exception on /chats [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
 Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
     self.dialect.do_execute(
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
     cursor.execute(statement, parameters)
-sqlite3.OperationalError: no such column: user.avatar_filename
+sqlite3.OperationalError: no such column: message.read_by_user1
 
 The above exception was the direct cause of the following exception:
 
@@ -68,11 +47,21 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "C:\pycharm\Finall_Project\app\routes.py", line 58, in login
-    user = db.session.scalar(
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\scoping.py", line 1843, in scalar
-    return self._proxied.scalar(
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2410, in scalar
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\pycharm\Finall_Project\app\routes.py", line 266, in chats
+    chat_data = [
+  File "C:\pycharm\Finall_Project\app\routes.py", line 271, in <listcomp>
+    "unread_count": Message.query.filter_by(chat_id=chat.id, read=False).count()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\query.py", line 3113, in count
+    self._legacy_from_self(col).enable_eagerloads(False).scalar()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2805, in scalar
+    ret = self.one()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2778, in one
+    return self._iter().one()  # type: ignore
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\query.py", line 2827, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2362, in execute
     return self._execute_internal(
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2247, in _execute_internal
     result: Result[Any] = compile_state_cls.orm_execute_statement(
@@ -94,20 +83,20 @@ Traceback (most recent call last):
     self.dialect.do_execute(
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
     cursor.execute(statement, parameters)
-sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: user.avatar_filename
-[SQL: SELECT user.id, user.username, user.email, user.password_hash, user.about_me, user.last_seen, user.avatar_filename 
-FROM user 
-WHERE user.username = ?]
-[parameters: ('prokivan',)]
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: message.read_by_user1
+[SQL: SELECT count(*) AS count_1 
+FROM (SELECT message.id AS message_id, message.chat_id AS message_chat_id, message.sender_id AS message_sender_id, message.content AS message_content, message.timestamp AS message_timestamp, message.read_by_user1 AS message_read_by_user1, message.read_by_user2 AS message_read_by_user2, message.read AS message_read 
+FROM message 
+WHERE message.chat_id = ? AND message.read = 0) AS anon_1]
+[parameters: (2,)]
 (Background on this error at: https://sqlalche.me/e/20/e3q8)
-2024-11-08 12:38:48,325 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:39:39,674 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:40:23,264 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:42:16,660 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:50:19,039 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:50:23,918 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:50:56,328 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-08 12:53:54,642 ERROR: Exception on /chat/1 [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+2024-11-06 15:18:31,709 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-06 15:19:25,535 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-06 15:19:28,819 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-06 15:19:34,153 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-06 17:58:51,892 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-06 18:06:04,273 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-06 18:21:55,987 ERROR: Exception on /chat/3 [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
 Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -118,7 +107,7 @@ Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1174, in make_response
     raise TypeError(
 TypeError: The view function for 'chat' did not return a valid response. The function either returned None or ended without a return statement.
-2024-11-08 12:53:54,859 ERROR: Exception on /chat/1 [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+2024-11-06 18:21:56,320 ERROR: Exception on /chat/3 [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
 Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -129,4 +118,9 @@ Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1174, in make_response
     raise TypeError(
 TypeError: The view function for 'chat' did not return a valid response. The function either returned None or ended without a return statement.
-2024-11-08 13:00:36,893 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-07 14:28:51,609 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-07 14:31:44,157 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-07 14:37:02,972 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-07 14:40:32,670 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-07 14:45:23,891 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-07 14:51:01,740 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]

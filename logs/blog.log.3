@@ -1,4 +1,43 @@
-2024-11-08 12:24:00,075 ERROR: Exception on / [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+2024-11-08 11:46:21,745 ERROR: Exception on /user/Shynshylla [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+Traceback (most recent call last):
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\pycharm\Finall_Project\app\routes.py", line 106, in user
+    return render_template('user.html', user=user, posts=posts.items,
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\pycharm\Finall_Project\app\templates\user.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\pycharm\Finall_Project\app\templates\base.html", line 33, in top-level template code
+    {% block content %}{% endblock %}
+  File "C:\pycharm\Finall_Project\app\templates\user.html", line 6, in block 'content'
+    <td><img src="{{ user.avatar(128) }}"></td>
+  File "C:\pycharm\Finall_Project\app\models.py", line 59, in avatar
+    return url_for('uploads', filename=f'{self.avatar_filename}')
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
+    return current_app.url_for(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1084, in url_for
+    return self.handle_url_build_error(error, endpoint, values)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1073, in url_for
+    rv = url_adapter.build(  # type: ignore[union-attr]
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'uploads' with values ['filename']. Did you mean 'explore' instead?
+2024-11-08 11:46:29,738 ERROR: Exception on /index [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
 Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -27,9 +66,9 @@ Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\app\templates\index.html", line 19, in block 'content'
     {% include '_post.html' %}
   File "C:\pycharm\Finall_Project\app\templates\_post.html", line 3, in top-level template code
-    <td><img src="{{ post.author.avatar(36) }}" class="avatar-small"></td>
+    <td><img src="{{ post.author.avatar(36) }}"></td>
   File "C:\pycharm\Finall_Project\app\models.py", line 59, in avatar
-    return url_for('uploads', filename=self.avatar_filename)
+    return url_for('uploads', filename=f'{self.avatar_filename}')
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
     return current_app.url_for(
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1084, in url_for
@@ -39,7 +78,7 @@ Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'uploads' with values ['filename']. Did you mean 'explore' instead?
-2024-11-08 12:24:04,732 ERROR: Exception on /user/john [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+2024-11-08 11:46:30,880 ERROR: Exception on /user/Shynshylla [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
 Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -66,9 +105,9 @@ Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\app\templates\base.html", line 33, in top-level template code
     {% block content %}{% endblock %}
   File "C:\pycharm\Finall_Project\app\templates\user.html", line 6, in block 'content'
-    <td><img src="{{ user.avatar(128) }}" class="avatar-large"></td>
+    <td><img src="{{ user.avatar(128) }}"></td>
   File "C:\pycharm\Finall_Project\app\models.py", line 59, in avatar
-    return url_for('uploads', filename=self.avatar_filename)
+    return url_for('uploads', filename=f'{self.avatar_filename}')
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
     return current_app.url_for(
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1084, in url_for
@@ -78,44 +117,14 @@ Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'uploads' with values ['filename']. Did you mean 'explore' instead?
-2024-11-08 12:24:05,385 ERROR: Exception on /explore [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
-Traceback (most recent call last):
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "C:\pycharm\Finall_Project\app\routes.py", line 48, in explore
-    return render_template('index.html', title='Explore', posts=posts.items,
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 150, in render_template
-    return _render(app, template, context)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 131, in _render
-    rv = template.render(context)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 1304, in render
-    self.environment.handle_exception()
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 939, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "C:\pycharm\Finall_Project\app\templates\index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "C:\pycharm\Finall_Project\app\templates\base.html", line 33, in top-level template code
-    {% block content %}{% endblock %}
-  File "C:\pycharm\Finall_Project\app\templates\index.html", line 19, in block 'content'
-    {% include '_post.html' %}
-  File "C:\pycharm\Finall_Project\app\templates\_post.html", line 3, in top-level template code
-    <td><img src="{{ post.author.avatar(36) }}" class="avatar-small"></td>
-  File "C:\pycharm\Finall_Project\app\models.py", line 59, in avatar
-    return url_for('uploads', filename=self.avatar_filename)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
-    return current_app.url_for(
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1084, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1073, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'uploads' with values ['filename']. Did you mean 'explore' instead?
+2024-11-08 11:51:02,509 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:00:44,292 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:02:54,782 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:04:48,460 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:07:36,980 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:14:03,778 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:14:26,981 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:16:21,406 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:18:17,403 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:19:27,810 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:23:59,156 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]

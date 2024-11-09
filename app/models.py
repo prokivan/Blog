@@ -6,6 +6,7 @@ from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
+from flask import url_for
 
 followers = sa.Table(
     'followers',
@@ -41,6 +42,8 @@ class User(UserMixin, db.Model):
         secondaryjoin=(followers.c.follower_id == id),
         back_populates='following')
 
+    avatar_filename: so.Mapped[Optional[str]] = so.mapped_column(sa.String(120), nullable=True)
+
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)
 
@@ -48,8 +51,11 @@ class User(UserMixin, db.Model):
         return check_password_hash(self.password_hash, password)
 
     def avatar(self, size):
-        digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-        return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
+        if self.avatar_filename:
+            return url_for('uploads', filename=self.avatar_filename)
+        else:
+            digest = md5(self.email.lower().encode('utf-8')).hexdigest()
+            return f'https://www.gravatar.com/avatar/{digest}?d=identicon&s={size}'
 
     def follow(self, user):
         if not self.is_following(user):
@@ -109,3 +115,20 @@ class Post(db.Model):
 
     def __repr__(self):
         return '<Post {}>'.format(self.body)
+
+
+class Chat(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    user1_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey('user.id'), nullable=False)
+    user2_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey('user.id'), nullable=False)
+
+
+class Message(db.Model):
+    id: so.Mapped[int] = so.mapped_column(primary_key=True)
+    chat_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey('chat.id'), nullable=False)
+    sender_id: so.Mapped[int] = so.mapped_column(sa.ForeignKey('user.id'), nullable=False)
+    content: so.Mapped[str] = so.mapped_column(sa.String(500), nullable=False)
+    timestamp: so.Mapped[datetime] = so.mapped_column(default=datetime.utcnow)
+    read: so.Mapped[bool] = so.mapped_column(default=False)
+
+    sender: so.Mapped[User] = so.relationship('User', backref='messages', foreign_keys=[sender_id])
