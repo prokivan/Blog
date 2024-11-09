@@ -1,6 +1,6 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
-from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length
+from wtforms.validators import ValidationError, DataRequired, Email, EqualTo, Length, Optional
 import sqlalchemy as sa
 from app import db
 from app.models import User
@@ -40,6 +40,9 @@ class EditProfileForm(FlaskForm):
     about_me = TextAreaField('About me', validators=[Length(min=0, max=140)])
     avatar = FileField('Upload new avatar',
                        validators=[FileAllowed(['jpg', 'png'], 'Images only!')])
+    password = PasswordField('New Password', validators=[Optional()])
+    password2 = PasswordField('Repeat Password', validators=[
+        Optional(), EqualTo('password', message='Passwords must match')])
     submit = SubmitField('Submit')
 
     def __init__(self, original_username, *args, **kwargs):

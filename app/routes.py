@@ -128,6 +128,9 @@ def edit_profile():
             form.avatar.data.save(file_path)
             current_user.avatar_filename = filename
 
+        if form.password.data:
+            current_user.set_password(form.password.data)
+
         db.session.commit()
         flash('Your changes have been saved.')
         return redirect(url_for('edit_profile'))
