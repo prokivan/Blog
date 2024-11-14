@@ -7,6 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from hashlib import md5
 from flask import url_for
+from sqlalchemy.sql import func
 
 followers = sa.Table(
     'followers',
@@ -43,6 +44,21 @@ class User(UserMixin, db.Model):
         back_populates='following')
 
     avatar_filename: so.Mapped[Optional[str]] = so.mapped_column(sa.String(120), nullable=True)
+
+    last_seen_post: so.Mapped[Optional[datetime]] = so.mapped_column(
+        default=lambda: datetime.now(timezone.utc))
+
+    def has_new_posts(self):
+        latest_post = db.session.scalar(sa.select(Post).order_by(Post.timestamp.desc()).limit(1))
+        return latest_post and (not self.last_seen_post or latest_post.timestamp > self.last_seen_post)
+
+    def has_unread_messages(self):
+        unread_count = db.session.query(func.count(Message.id)).join(Chat).filter(
+            (Chat.user1_id == self.id) | (Chat.user2_id == self.id),
+            Message.read == False,
+            Message.sender_id != self.id
+        ).scalar()
+        return unread_count > 0
 
     def set_password(self, password):
         self.password_hash = generate_password_hash(password)

@@ -30,7 +30,12 @@
                 {% if user.id != current_user.id %}
                 <a href="{{ url_for('start_chat', user_id=user.id) }}" class="btn btn-primary">Start Chat</a>
                 {% else %}
-                    <a href="{{ url_for('chats') }}">My Chats</a>
+                    <div style="position: relative; display: inline-block;">
+                        <a href="{{ url_for('chats') }}">My Chats</a>
+                        {% if unread_chats %}
+                            <span class="notification-dot"></span>
+                        {% endif %}
+                    </div>
                 {% endif %}
 
             </td>

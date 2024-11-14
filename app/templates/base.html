@@ -2,6 +2,7 @@
 <html>
     <head>
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="icon" href="{{ url_for('static', filename='icon.png') }}" type="image/x-icon">
         {% if title %}
         <title>{{ title }} - Blog</title>
         {% else %}
@@ -9,15 +10,26 @@
         {% endif %}
     </head>
     <body>
-        <div>
+        <div >
             Blog:
             <a href="{{ url_for('index') }}">Home</a>
-            <a href="{{ url_for('explore') }}">Explore</a>
+                <div style="position: relative; display: inline-block;">
+                    <a href="{{ url_for('explore') }}">Explore</a>
+                    {% if current_user.is_authenticated and current_user.has_new_posts() %}
+                        <span class="notification-dot"></span>
+                    {% endif %}
+                </div>
+
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Login</a>
             {% else %}
-            <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
-            <a href="{{ url_for('logout') }}">Logout</a>
+            <div style="position: relative; display: inline-block;">
+                <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+                {% if current_user.has_unread_messages() %}
+                    <span class="notification-dot"></span>
+                {% endif %}
+            </div>
+            <a href="{{ url_for('logout') }}" class="logout-link" >Logout</a>
             {% endif %}
         </div>
         <hr>

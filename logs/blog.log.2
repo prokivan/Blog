@@ -1,4 +1,4 @@
-2024-11-08 12:24:00,075 ERROR: Exception on / [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+2024-11-14 18:43:52,610 ERROR: Exception on /user/john [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
 Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -10,48 +10,7 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "C:\pycharm\Finall_Project\app\routes.py", line 32, in index
-    return render_template('index.html', title='Home', form=form,
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 150, in render_template
-    return _render(app, template, context)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 131, in _render
-    rv = template.render(context)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 1304, in render
-    self.environment.handle_exception()
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 939, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "C:\pycharm\Finall_Project\app\templates\index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "C:\pycharm\Finall_Project\app\templates\base.html", line 33, in top-level template code
-    {% block content %}{% endblock %}
-  File "C:\pycharm\Finall_Project\app\templates\index.html", line 19, in block 'content'
-    {% include '_post.html' %}
-  File "C:\pycharm\Finall_Project\app\templates\_post.html", line 3, in top-level template code
-    <td><img src="{{ post.author.avatar(36) }}" class="avatar-small"></td>
-  File "C:\pycharm\Finall_Project\app\models.py", line 59, in avatar
-    return url_for('uploads', filename=self.avatar_filename)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
-    return current_app.url_for(
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1084, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1073, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'uploads' with values ['filename']. Did you mean 'explore' instead?
-2024-11-08 12:24:04,732 ERROR: Exception on /user/john [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
-Traceback (most recent call last):
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
-    response = self.full_dispatch_request()
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "C:\pycharm\Finall_Project\app\routes.py", line 106, in user
+  File "C:\pycharm\Finall_Project\app\routes.py", line 110, in user
     return render_template('user.html', user=user, posts=posts.items,
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 150, in render_template
     return _render(app, template, context)
@@ -63,22 +22,14 @@ Traceback (most recent call last):
     raise rewrite_traceback_stack(source=source)
   File "C:\pycharm\Finall_Project\app\templates\user.html", line 1, in top-level template code
     {% extends "base.html" %}
-  File "C:\pycharm\Finall_Project\app\templates\base.html", line 33, in top-level template code
+  File "C:\pycharm\Finall_Project\app\templates\base.html", line 40, in top-level template code
     {% block content %}{% endblock %}
-  File "C:\pycharm\Finall_Project\app\templates\user.html", line 6, in block 'content'
-    <td><img src="{{ user.avatar(128) }}" class="avatar-large"></td>
-  File "C:\pycharm\Finall_Project\app\models.py", line 59, in avatar
-    return url_for('uploads', filename=self.avatar_filename)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
-    return current_app.url_for(
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1084, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1073, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'uploads' with values ['filename']. Did you mean 'explore' instead?
-2024-11-08 12:24:05,385 ERROR: Exception on /explore [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+  File "C:\pycharm\Finall_Project\app\templates\user.html", line 35, in block 'content'
+    {% if current_user.is_authenticated and current_user.has_unread_messages() %}
+  File "C:\pycharm\Finall_Project\app\models.py", line 55, in has_unread_messages
+    return any(chat.unread_count > 0 for chat in self.chats)
+AttributeError: 'User' object has no attribute 'chats'
+2024-11-14 18:44:04,517 ERROR: Exception on /user/john [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
 Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -90,8 +41,8 @@ Traceback (most recent call last):
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
     return current_app.ensure_sync(func)(*args, **kwargs)
-  File "C:\pycharm\Finall_Project\app\routes.py", line 48, in explore
-    return render_template('index.html', title='Explore', posts=posts.items,
+  File "C:\pycharm\Finall_Project\app\routes.py", line 110, in user
+    return render_template('user.html', user=user, posts=posts.items,
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 150, in render_template
     return _render(app, template, context)
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 131, in _render
@@ -100,22 +51,47 @@ Traceback (most recent call last):
     self.environment.handle_exception()
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 939, in handle_exception
     raise rewrite_traceback_stack(source=source)
-  File "C:\pycharm\Finall_Project\app\templates\index.html", line 1, in top-level template code
+  File "C:\pycharm\Finall_Project\app\templates\user.html", line 1, in top-level template code
     {% extends "base.html" %}
-  File "C:\pycharm\Finall_Project\app\templates\base.html", line 33, in top-level template code
+  File "C:\pycharm\Finall_Project\app\templates\base.html", line 40, in top-level template code
     {% block content %}{% endblock %}
-  File "C:\pycharm\Finall_Project\app\templates\index.html", line 19, in block 'content'
-    {% include '_post.html' %}
-  File "C:\pycharm\Finall_Project\app\templates\_post.html", line 3, in top-level template code
-    <td><img src="{{ post.author.avatar(36) }}" class="avatar-small"></td>
-  File "C:\pycharm\Finall_Project\app\models.py", line 59, in avatar
-    return url_for('uploads', filename=self.avatar_filename)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
-    return current_app.url_for(
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1084, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1073, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'uploads' with values ['filename']. Did you mean 'explore' instead?
+  File "C:\pycharm\Finall_Project\app\templates\user.html", line 35, in block 'content'
+    {% if current_user.is_authenticated and current_user.has_unread_messages() %}
+  File "C:\pycharm\Finall_Project\app\models.py", line 55, in has_unread_messages
+    return any(chat.unread_count > 0 for chat in self.chats)
+AttributeError: 'User' object has no attribute 'chats'
+2024-11-14 18:44:29,404 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 18:44:32,133 ERROR: Exception on /user/john [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+Traceback (most recent call last):
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
+    return current_app.ensure_sync(func)(*args, **kwargs)
+  File "C:\pycharm\Finall_Project\app\routes.py", line 110, in user
+    return render_template('user.html', user=user, posts=posts.items,
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 150, in render_template
+    return _render(app, template, context)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 131, in _render
+    rv = template.render(context)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 1304, in render
+    self.environment.handle_exception()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 939, in handle_exception
+    raise rewrite_traceback_stack(source=source)
+  File "C:\pycharm\Finall_Project\app\templates\user.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\pycharm\Finall_Project\app\templates\base.html", line 40, in top-level template code
+    {% block content %}{% endblock %}
+  File "C:\pycharm\Finall_Project\app\templates\user.html", line 35, in block 'content'
+    {% if current_user.is_authenticated and current_user.has_unread_messages() %}
+  File "C:\pycharm\Finall_Project\app\models.py", line 55, in has_unread_messages
+    return any(chat.unread_count > 0 for chat in self.chats)
+AttributeError: 'User' object has no attribute 'chats'
+2024-11-14 18:50:51,638 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 18:50:58,527 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 18:51:06,852 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]

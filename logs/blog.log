@@ -1,14 +1,87 @@
-2024-11-08 13:03:14,007 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 08:22:09,809 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 08:24:47,854 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 08:25:19,829 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 08:25:48,813 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 08:37:23,901 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 08:57:41,267 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 08:58:51,883 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 08:59:19,014 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 09:02:24,150 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 09:02:57,485 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 09:04:19,958 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 09:29:52,623 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
-2024-11-09 09:32:28,321 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 18:51:08,620 ERROR: Exception on /favicon.ico [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+Traceback (most recent call last):
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 878, in full_dispatch_request
+    rv = self.preprocess_request()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1253, in preprocess_request
+    rv = self.ensure_sync(before_func)()
+  File "C:\pycharm\Finall_Project\app\routes.py", line 116, in before_request
+    if current_user.is_authenticated:
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\local.py", line 318, in __get__
+    obj = instance._get_current_object()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\local.py", line 526, in _get_current_object
+    return get_name(local())
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\utils.py", line 25, in <lambda>
+    current_user = LocalProxy(lambda: _get_user())
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\utils.py", line 370, in _get_user
+    current_app.login_manager._load_user()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\login_manager.py", line 364, in _load_user
+    user = self._user_callback(user_id)
+  File "C:\pycharm\Finall_Project\app\models.py", line 115, in load_user
+    return db.session.get(User, int(id))
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\scoping.py", line 1060, in get
+    return self._proxied.get(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\session.py", line 3693, in get
+    return self._get_impl(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\session.py", line 3873, in _get_impl
+    return db_load_fn(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\loading.py", line 694, in load_on_pk_identity
+    session.execute(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2362, in execute
+    return self._execute_internal(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1632, in _execute_clauseelement
+    compiled_sql, extracted_params, cache_hit = elem._compile_w_cache(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 703, in _compile_w_cache
+    compiled_sql = self._compiler(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 316, in _compiler
+    return dialect.statement_compiler(dialect, self, **kw)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\sql\compiler.py", line 1429, in __init__
+    Compiled.__init__(self, dialect, statement, **kwargs)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\sql\compiler.py", line 870, in __init__
+    self.string = self.process(self.statement, **compile_kwargs)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\sql\compiler.py", line 915, in process
+    return obj._compiler_dispatch(self, **kwargs)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\sql\visitors.py", line 141, in _compiler_dispatch
+    return meth(self, **kw)  # type: ignore  # noqa: E501
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\sql\compiler.py", line 4679, in visit_select
+    compile_state = select_stmt._compile_state_factory(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\sql\base.py", line 683, in create_for_statement
+    return klass.create_for_statement(statement, compiler, **kw)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\context.py", line 1110, in create_for_statement
+    _QueryEntity.to_compile_state(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\context.py", line 2565, in to_compile_state
+    _MapperEntity(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\context.py", line 2645, in __init__
+    entity._post_inspect
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\util\langhelpers.py", line 1253, in __get__
+    obj.__dict__[self.__name__] = result = self.fget(obj)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\mapper.py", line 2722, in _post_inspect
+    self._check_configure()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\mapper.py", line 2399, in _check_configure
+    _configure_registries({self.registry}, cascade=True)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\mapper.py", line 4215, in _configure_registries
+    _do_configure_registries(registries, cascade)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\mapper.py", line 4252, in _do_configure_registries
+    raise e
+sqlalchemy.exc.InvalidRequestError: One or more mappers failed to initialize - can't proceed with initialization of other mappers. Triggering mapper: 'Mapper[User(user)]'. Original exception was: Could not determine join condition between parent/child tables on relationship User.chats - there are multiple foreign key paths linking the tables.  Specify the 'foreign_keys' argument, providing a list of those columns which should be counted as containing a foreign key reference to the parent table.
+2024-11-14 18:58:40,299 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 18:59:58,243 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 19:00:02,303 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 19:00:20,712 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 19:11:49,413 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 19:20:20,684 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 19:24:09,189 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 19:25:43,026 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 19:30:15,171 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-14 19:54:39,154 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]

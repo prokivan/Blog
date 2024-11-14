@@ -1,4 +1,4 @@
-2024-11-08 11:46:18,835 ERROR: Exception on / [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+2024-11-08 12:24:06,002 ERROR: Exception on /index [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
 Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -27,9 +27,9 @@ Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\app\templates\index.html", line 19, in block 'content'
     {% include '_post.html' %}
   File "C:\pycharm\Finall_Project\app\templates\_post.html", line 3, in top-level template code
-    <td><img src="{{ post.author.avatar(36) }}"></td>
+    <td><img src="{{ post.author.avatar(36) }}" class="avatar-small"></td>
   File "C:\pycharm\Finall_Project\app\models.py", line 59, in avatar
-    return url_for('uploads', filename=f'{self.avatar_filename}')
+    return url_for('uploads', filename=self.avatar_filename)
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
     return current_app.url_for(
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1084, in url_for
@@ -39,7 +39,26 @@ Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
     raise BuildError(endpoint, values, method, self)
 werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'uploads' with values ['filename']. Did you mean 'explore' instead?
-2024-11-08 11:46:20,612 ERROR: Exception on /index [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+2024-11-08 12:30:16,325 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:30:20,019 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:34:53,005 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:36:23,296 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:36:54,156 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:37:08,510 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:37:13,836 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:37:17,142 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:38:03,996 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:38:14,904 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:38:20,830 ERROR: Exception on /login [POST] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+Traceback (most recent call last):
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlite3.OperationalError: no such column: user.avatar_filename
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
@@ -49,75 +68,65 @@ Traceback (most recent call last):
     rv = self.dispatch_request()
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "C:\pycharm\Finall_Project\app\routes.py", line 32, in index
-    return render_template('index.html', title='Home', form=form,
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 150, in render_template
-    return _render(app, template, context)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 131, in _render
-    rv = template.render(context)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 1304, in render
-    self.environment.handle_exception()
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 939, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "C:\pycharm\Finall_Project\app\templates\index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "C:\pycharm\Finall_Project\app\templates\base.html", line 33, in top-level template code
-    {% block content %}{% endblock %}
-  File "C:\pycharm\Finall_Project\app\templates\index.html", line 19, in block 'content'
-    {% include '_post.html' %}
-  File "C:\pycharm\Finall_Project\app\templates\_post.html", line 3, in top-level template code
-    <td><img src="{{ post.author.avatar(36) }}"></td>
-  File "C:\pycharm\Finall_Project\app\models.py", line 59, in avatar
-    return url_for('uploads', filename=f'{self.avatar_filename}')
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
-    return current_app.url_for(
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1084, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1073, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'uploads' with values ['filename']. Did you mean 'explore' instead?
-2024-11-08 11:46:21,171 ERROR: Exception on /explore [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+  File "C:\pycharm\Finall_Project\app\routes.py", line 58, in login
+    user = db.session.scalar(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\scoping.py", line 1843, in scalar
+    return self._proxied.scalar(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2410, in scalar
+    return self._execute_internal(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\orm\context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.OperationalError: (sqlite3.OperationalError) no such column: user.avatar_filename
+[SQL: SELECT user.id, user.username, user.email, user.password_hash, user.about_me, user.last_seen, user.avatar_filename 
+FROM user 
+WHERE user.username = ?]
+[parameters: ('prokivan',)]
+(Background on this error at: https://sqlalche.me/e/20/e3q8)
+2024-11-08 12:38:48,325 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:39:39,674 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:40:23,264 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:42:16,660 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:50:19,039 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:50:23,918 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:50:56,328 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
+2024-11-08 12:53:54,642 ERROR: Exception on /chat/1 [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
 Traceback (most recent call last):
   File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
     response = self.full_dispatch_request()
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 882, in full_dispatch_request
-    rv = self.handle_user_exception(e)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask_login\utils.py", line 290, in decorated_view
-    return current_app.ensure_sync(func)(*args, **kwargs)
-  File "C:\pycharm\Finall_Project\app\routes.py", line 48, in explore
-    return render_template('index.html', title='Explore', posts=posts.items,
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 150, in render_template
-    return _render(app, template, context)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\templating.py", line 131, in _render
-    rv = template.render(context)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 1304, in render
-    self.environment.handle_exception()
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\jinja2\environment.py", line 939, in handle_exception
-    raise rewrite_traceback_stack(source=source)
-  File "C:\pycharm\Finall_Project\app\templates\index.html", line 1, in top-level template code
-    {% extends "base.html" %}
-  File "C:\pycharm\Finall_Project\app\templates\base.html", line 33, in top-level template code
-    {% block content %}{% endblock %}
-  File "C:\pycharm\Finall_Project\app\templates\index.html", line 19, in block 'content'
-    {% include '_post.html' %}
-  File "C:\pycharm\Finall_Project\app\templates\_post.html", line 3, in top-level template code
-    <td><img src="{{ post.author.avatar(36) }}"></td>
-  File "C:\pycharm\Finall_Project\app\models.py", line 59, in avatar
-    return url_for('uploads', filename=f'{self.avatar_filename}')
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\helpers.py", line 220, in url_for
-    return current_app.url_for(
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1084, in url_for
-    return self.handle_url_build_error(error, endpoint, values)
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1073, in url_for
-    rv = url_adapter.build(  # type: ignore[union-attr]
-  File "C:\pycharm\Finall_Project\venv\lib\site-packages\werkzeug\routing\map.py", line 924, in build
-    raise BuildError(endpoint, values, method, self)
-werkzeug.routing.exceptions.BuildError: Could not build url for endpoint 'uploads' with values ['filename']. Did you mean 'explore' instead?
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 883, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 902, in finalize_request
+    response = self.make_response(rv)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1174, in make_response
+    raise TypeError(
+TypeError: The view function for 'chat' did not return a valid response. The function either returned None or ended without a return statement.
+2024-11-08 12:53:54,859 ERROR: Exception on /chat/1 [GET] [in C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py:838]
+Traceback (most recent call last):
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1473, in wsgi_app
+    response = self.full_dispatch_request()
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 883, in full_dispatch_request
+    return self.finalize_request(rv)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 902, in finalize_request
+    response = self.make_response(rv)
+  File "C:\pycharm\Finall_Project\venv\lib\site-packages\flask\app.py", line 1174, in make_response
+    raise TypeError(
+TypeError: The view function for 'chat' did not return a valid response. The function either returned None or ended without a return statement.
+2024-11-08 13:00:36,893 INFO: Blog startup [in C:\pycharm\Finall_Project\app\__init__.py:31]
